@@ -14,11 +14,11 @@ open class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
     }
 
-    fun setFragment(@IdRes containerId:Int,@NotNull fragment:Fragment,addTobackStack:Boolean){
-        val fragmentManager =supportFragmentManager
+    fun setFragment(@IdRes containerId: Int, @NotNull fragment: Fragment, addTobackStack: Boolean) {
+        val fragmentManager = supportFragmentManager
         val fragmentTransition = fragmentManager.beginTransaction()
-        fragmentTransition.replace(containerId,fragment)
-        if(addTobackStack){
+        fragmentTransition.replace(containerId, fragment)
+        if (addTobackStack) {
             fragmentTransition.addToBackStack(fragment.javaClass.simpleName)
         }
         fragmentTransition.commit()
@@ -29,13 +29,19 @@ open class BaseActivity : AppCompatActivity() {
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetworkInfo = connectivityManager.activeNetworkInfo
         returnValue = activeNetworkInfo != null && activeNetworkInfo.isConnected
-
         return returnValue
     }
 
 
-
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val stackEntryCount = supportFragmentManager.backStackEntryCount
+        if (0 < stackEntryCount) {
+            supportFragmentManager.popBackStack()
+        } else {
+            super.onBackPressed()
+        }
+    }
 
 
 }

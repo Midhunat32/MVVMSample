@@ -14,6 +14,10 @@ import com.mine.demomvvm.R
  */
 class DashboardFragment : Fragment() {
 
+    companion object Factory{
+        fun newInstance():DashboardFragment = DashboardFragment()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_dashboard, container, false)
