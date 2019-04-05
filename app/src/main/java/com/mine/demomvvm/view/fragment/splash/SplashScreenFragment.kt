@@ -36,6 +36,7 @@ class SplashScreenFragment : Fragment() {
     private fun moveToHome() {
         Handler().postDelayed({
             startActivity(Intent(activity,LoginActivity::class.java))
+            activity?.finish()
         },3000)
 
     }

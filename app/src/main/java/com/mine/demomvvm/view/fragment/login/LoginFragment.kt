@@ -39,7 +39,6 @@ class LoginFragment : Fragment(){
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
         binding.loginCallback = callback
         return binding.root
-        //return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,7 +51,7 @@ class LoginFragment : Fragment(){
     }
 
 
-    var callback =object :ClickCallBack{
+    var callback = object :ClickCallBack{
         override fun onClick() {
             if(isValid()){
                 DisplayInfo.showProgressBar(activity!!)

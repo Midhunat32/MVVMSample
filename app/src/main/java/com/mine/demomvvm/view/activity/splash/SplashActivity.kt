@@ -18,6 +18,6 @@ class SplashActivity : BaseActivity() {
 
     private fun loadFragment() {
         val fragment = SplashScreenFragment.newInstance()
-        setFragment(R.id.containerId,fragment,true)
+        setFragment(R.id.containerId,fragment,false)
     }
 }
