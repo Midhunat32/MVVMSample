@@ -59,7 +59,6 @@ class LoginFragment : Fragment(){
                 observeLoginViewModel(loginViewModel,loginRequest)
             }
         }
-
     }
 
     fun observeLoginViewModel(loginViewModel: LoginViewModel?, loginRequest: LoginRequest) {

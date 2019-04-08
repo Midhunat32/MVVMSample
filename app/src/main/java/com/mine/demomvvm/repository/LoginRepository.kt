@@ -24,7 +24,7 @@ class LoginRepository {
     }
 
 
-    fun doLogin(loginModel:LoginRequest): MutableLiveData<List<LoginResponse>> {
+     fun doLogin(loginModel:LoginRequest): MutableLiveData<List<LoginResponse>> {
         val data:MutableLiveData<List<LoginResponse>> = MutableLiveData()
         val loginManager = RetrofitClient.getClient().create(CloudLoginManager::class.java)
         val call = loginManager.getLoginData()
@@ -34,7 +34,6 @@ class LoginRepository {
             }
             override fun onResponse(call: Call<List<LoginResponse>>, response: Response<List<LoginResponse>>) {
                 data.value = response.body()
-
             }
         })
         return data

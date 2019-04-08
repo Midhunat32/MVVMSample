@@ -1,5 +1,6 @@
 package com.mine.demomvvm.view.activity.login
 
+import android.app.Application
 import android.os.Bundle
 import com.mine.demomvvm.R
 import com.mine.demomvvm.view.activity.BaseActivity
