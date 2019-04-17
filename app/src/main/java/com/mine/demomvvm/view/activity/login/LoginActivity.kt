@@ -12,7 +12,6 @@ class LoginActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         loadFragment()
-
     }
 
     private fun loadFragment() {

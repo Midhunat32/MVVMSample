@@ -3,6 +3,7 @@ package com.mine.demomvvm.view.fragment.login
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.SyncRequest
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,6 +11,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.mine.demomvvm.AppError
 import com.mine.demomvvm.R
 import com.mine.demomvvm.callback.ClickCallBack
 import com.mine.demomvvm.cloud.requestmodel.LoginRequest
@@ -62,10 +64,15 @@ class LoginFragment : Fragment(){
     }
 
     fun observeLoginViewModel(loginViewModel: LoginViewModel?, loginRequest: LoginRequest) {
-        loginViewModel?.getLoginObservable(loginRequest)?.observe(this,Observer<List<LoginResponse>>(){
+        loginViewModel?.getLoginObservable(loginRequest)?.observe(this,Observer<Any>(){
             DisplayInfo.dismissProgressBar(activity!!)
-            val response :List<LoginResponse> = it!!
-            DisplayInfo.showToast(activity!!,response[0].title)
+            if (it is List<*>){
+                var response:List<LoginResponse> = it as List<LoginResponse>
+                DisplayInfo.showToast(activity!!,response[0].id+" Success")
+            }else if (it is AppError){
+                var error = it as AppError
+                DisplayInfo.showToast(activity!!,error.errorMsg)
+            }
         })
     }
 
@@ -78,10 +85,9 @@ class LoginFragment : Fragment(){
             return false
         }
         if (TextUtils.isEmpty(password)){
-            etPassword.setError("Imvalid Filed")
+            etPassword.setError("Imvalid Failed")
             return false
         }
-
         return true
     }
 

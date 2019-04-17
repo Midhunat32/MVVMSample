@@ -9,7 +9,7 @@ import com.mine.demomvvm.repository.LoginRepository
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
-  fun getLoginObservable(request: LoginRequest):LiveData<List<LoginResponse>>{
+  fun getLoginObservable(request: LoginRequest):LiveData<Any>{
       return LoginRepository.getInstance().doLogin(request)
   }
 

@@ -2,6 +2,7 @@ package com.mine.demomvvm.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import com.mine.demomvvm.AppError
 import com.mine.demomvvm.cloud.RetrofitClient
 import com.mine.demomvvm.cloud.contract.CloudLoginManager
 import com.mine.demomvvm.cloud.requestmodel.LoginRequest
@@ -24,16 +25,18 @@ class LoginRepository {
     }
 
 
-     fun doLogin(loginModel:LoginRequest): MutableLiveData<List<LoginResponse>> {
-        val data:MutableLiveData<List<LoginResponse>> = MutableLiveData()
+     fun doLogin(loginModel:LoginRequest): MutableLiveData<Any> {
+        val data:MutableLiveData<Any> = MutableLiveData()
         val loginManager = RetrofitClient.getClient().create(CloudLoginManager::class.java)
         val call = loginManager.getLoginData()
         call.enqueue(object:Callback<List<LoginResponse>>{
             override fun onFailure(call: Call<List<LoginResponse>>, t: Throwable) {
-                data.value = null
+                data.value = AppError(254,"OnFailure")
             }
             override fun onResponse(call: Call<List<LoginResponse>>, response: Response<List<LoginResponse>>) {
                 data.value = response.body()
+                //data.value = AppError(254,"OnSuccess")
+
             }
         })
         return data
